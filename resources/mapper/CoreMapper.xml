@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cn.hengxin.dao.CoreMapper">
+	
+	<!-- 发布核心  -->
+	<insert id="insertCore" useGeneratedKeys="true">
+		INSERT INTO core(corename,keyword1,describe1,img1Addr,keyword2,describe2,img2Addr)
+		VALUES(#{corename},#{keyword1},#{describe1},#{img1Addr}
+		,#{keyword2},#{describe2},#{img2Addr})
+	</insert>
+	
+	<!-- 更新核心  -->
+	<update id="updateCore">
+		UPDATE core
+		<set>
+			<if test="corename!=null and corename!=''">
+				corename=#{corename},
+			</if>
+			<if test="describe1!=null and describe1!=''">
+				describe1=#{describe1},
+			</if>
+			<if test="keyword1!=null and keyword1!=''">
+				keyword1=#{keyword1},
+			</if>
+			<if test="img1Addr!=null and img1Addr!=''">
+				img1Addr=#{img1Addr},
+			</if>
+			
+			<if test="describe2!=null and describe2!=''">
+				describe2=#{describe2},
+			</if>
+			<if test="keyword2!=null and keyword2!=''">
+				keyword2=#{keyword2},
+			</if>
+			<if test="img2Addr!=null and img2Addr!=''">
+				img2Addr=#{img2Addr},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<!-- 删除服务  -->
+	<delete id="deleteCore">
+		DELETE FROM core WHERE id=#{id}
+	</delete>
+
+	
+	<!-- 得到单条记录  -->
+	<select id="getCore" resultType="Core">
+		SELECT * FROM core WHERE id=#{id}
+	</select>
+	
+	<!-- 得到所有记录  -->
+	<select id="listCore" resultType="Core">
+		SELECT * FROM core
+	</select>
+	
+</mapper>

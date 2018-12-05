@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cn.hengxin.dao.NewsMapper">
+	
+	<!-- 得到全部新闻  -->
+	<select id="listNews" resultType="News">
+		SELECT * FROM news ORDER BY time DESC
+	</select> 
+	
+	<!-- 得到单条新闻 -->
+	<select id="getNews" resultType="News">
+		SELECT * FROM news WHERE newsid=#{newsid}
+	</select>
+	
+	<!--  得到轮播新闻  -->
+	<select id="listCarousel" resultType="News">
+		SELECT * FROM news WHERE isShow=1 ORDER BY time DESC LIMIT 0,3;
+	</select>
+	
+	<!-- 得到最新新闻  -->
+	<select id="listLatestNews" resultType="News">
+		SELECT * FROM news ORDER BY time DESC LIMIT 0,3;
+	</select>
+	
+	<!-- 发布新闻  -->
+	<insert id="insertNews" useGeneratedKeys="true">
+		INSERT INTO news(title,content,isShow,imgAddr,time)VALUES(#{title},#{content},#{isShow},#{imgAddr},#{time})
+	</insert>
+	
+	<!-- 更新新闻  -->
+	<update id="updateNews">
+		UPDATE news SET title=#{title},content=#{content},isShow=#{isShow},imgAddr=#{imgAddr},time=#{time} WHERE newsid=#{newsid}
+	</update>
+	
+	<!-- 删除新闻  -->
+	<delete id="deleteNews">
+		DELETE FROM news WHERE newsid=#{newsid}
+	</delete>
+	
+</mapper>

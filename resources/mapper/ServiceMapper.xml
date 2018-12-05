@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cn.hengxin.dao.ServiceMapper">
+	
+	<!-- 发布服务  -->
+	<insert id="insertService" useGeneratedKeys="true">
+		INSERT INTO service(servicename,servicedescribe,type,adv1,img1Addr,adv2,img2Addr,adv3,img3Addr)
+		VALUES(#{servicename},#{servicedescribe},#{type},#{adv1},#{img1Addr},#{adv2},#{img2Addr},#{adv3},#{img3Addr})
+	</insert>
+	
+	<!-- 更新服务  -->
+	<update id="updateService">
+		UPDATE service 
+		<set>
+			<if test="servicename!=null and servicename!=''">
+				servicename=#{servicename},
+			</if>
+			<if test="servicedescribe!=null and servicedescribe!=''">
+				servicedescribe=#{servicedescribe},
+			</if>
+			<if test="type!=null and type!=''">
+				type=#{type},
+			</if>
+			<if test="adv1!=null and adv1!=''">
+				adv1=#{adv1},
+			</if>
+			<if test="img1Addr!=null and img1Addr!=''">
+				img1Addr=#{img1Addr},
+			</if>
+			<if test="adv2!=null and adv2!=''">
+				adv2=#{adv2},
+			</if>
+			<if test="img2Addr!=null and img2Addr!=''">
+				img2Addr=#{img2Addr},
+			</if>
+			<if test="adv3!=null and adv3!=''">
+				adv3=#{adv3},
+			</if>
+			<if test="img3Addr!=null and img3Addr!=''">
+				img3Addr=#{img3Addr}
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<!-- 删除服务  -->
+	<delete id="deleteService">
+		DELETE FROM service WHERE id=#{id}
+	</delete>
+	
+	<!--  根据类型得到集合  -->
+	<select id="listServiceByType" resultType="Service">
+		SELECT * FROM service WHERE type=#{type}
+	</select>	
+	
+	<!-- 得到单条记录  -->
+	<select id="getService" resultType="Service">
+		SELECT * FROM service WHERE id=#{id}
+	</select>
+	
+	<!-- 得到所有记录  -->
+	<select id="listService" resultType="Service">
+		SELECT * FROM service ORDER BY type
+	</select>
+	
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cn.hengxin.dao.CaseMapper">
+	
+	<!-- 发布案例  -->
+	<insert id="insertCase" useGeneratedKeys="true">
+		INSERT INTO client(clientName,clientLogoAddr,caseDescribe,caseImgAddr)
+		VALUES(#{clientName},#{clientLogoAddr},#{caseDescribe},#{caseImgAddr})
+	</insert>
+	
+	<!-- 更新案例  -->
+	<update id="updateCase">
+		UPDATE client
+		<set>
+			<if test="clientName!=null and clientName!=''">
+				clientName=#{clientName},
+			</if>
+			<if test="clientLogoAddr!=null and clientLogoAddr!=''">
+				clientLogoAddr=#{clientLogoAddr},
+			</if>
+			<if test="caseDescribe!=null and caseDescribe!=''">
+				caseDescribe=#{caseDescribe},
+			</if>
+			<if test="caseImgAddr!=null and caseImgAddr!=''">
+				caseImgAddr=#{caseImgAddr}
+			</if>
+			
+		</set>
+		where id=#{id}
+	</update>
+	
+	<!-- 删除案例  -->
+	<delete id="deleteCase">
+		DELETE FROM client WHERE id=#{id}
+	</delete>
+
+	
+	<!-- 得到单条记录  -->
+	<select id="getCase" resultType="Client">
+		SELECT * FROM client WHERE id=#{id}
+	</select>
+	
+	<!-- 得到所有记录  -->
+	<select id="listCase" resultType="Client">
+		SELECT * FROM client
+	</select>
+	
+</mapper>

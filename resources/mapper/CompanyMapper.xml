@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cn.hengxin.dao.CompanyMapper">
+	
+	<!-- 发布  -->
+	<insert id="insertCompany" useGeneratedKeys="true">
+		INSERT INTO company(companyName,address,email,telephone,logoAddr,content)
+		VALUES(#{companyName},#{address},#{email},#{telephone},#{logoAddr},#{content})
+	</insert>
+	
+	<!-- 更新  -->
+	<update id="updateCompany">
+		UPDATE company
+		<set>
+			<if test="companyName!=null and companyName!=''">
+				companyName=#{companyName},
+			</if>
+			<if test="address!=null and address!=''">
+				address=#{address},
+			</if>
+			<if test="email!=null and email!=''">
+				email=#{email},
+			</if>
+			<if test="telephone!=null and telephone!=''">
+				telephone=#{telephone},
+			</if>
+			<if test="logoAddr!=null and logoAddr!=''">
+				logoAddr=#{logoAddr},
+			</if>
+			<if test="content!=null and content!=''">
+				content=#{content}
+			</if>
+			
+		</set>
+		where id=#{id}
+	</update>
+	
+	<!-- 删除  -->
+	<delete id="deleteCompany">
+		DELETE FROM company WHERE id=#{id}
+	</delete>
+
+	
+	<!-- 得到单条记录  -->
+	<select id="getCompany" resultType="Company">
+		SELECT * FROM company WHERE id=#{id}
+	</select>
+	
+	<!-- 得到所有记录  -->
+	<select id="listCompany" resultType="Company">
+		SELECT * FROM company
+	</select>
+	
+</mapper>
